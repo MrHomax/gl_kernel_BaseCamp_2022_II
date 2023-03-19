@@ -111,6 +111,13 @@ static ssize_t dev_write(struct file *filep, const char *buffer, size_t len, lof
 	return data_size;
 }
 
+
+static int my_dev_uevent(struct device *dev, struct kobj_uevent_env *env)
+{
+    add_uevent_var(env, "DEVMODE=%#o", 0666);
+    return 0;
+}
+
 static struct file_operations cdev_fops =
 {
 	.open = dev_open,
@@ -205,6 +212,7 @@ static int __init my_module_init(void)
 		ret = -1;
 		goto class_err;
 	}
+	pclass->dev_uevent = my_dev_uevent;
 	pr_info("MY_MODULE: chardev device class created successfully\n");
 
 	pdev = device_create(pclass, NULL, dev, NULL, CLASS_NAME"0");
