@@ -30,7 +30,7 @@ MODULE_VERSION("0.2"); ///< The version of the module
 #define DEVICE_NAME "my_chrdevice"
 #define DATA_BUFFER_SIZE 1024
 
-static char procfs_buffer[PROC_BUFFER_SIZE] = "MODULE NAME: my_module\nAUTHOR: Maksym Khomenko\nDESCRIPTION: Simple gpio driver with proc_fs support\nVERSION: 0.2\nLED STATE: ON\n";
+static char procfs_buffer[PROC_BUFFER_SIZE] = "MODULE NAME: my_module\nAUTHOR: Maksym Khomenko\nDESCRIPTION: Simple gpio character driver with proc_fs support\nVERSION: 0.3\nLED STATE: ON\n";
 static size_t procfs_buffer_size = PROC_BUFFER_SIZE;
 static struct proc_dir_entry *proc_file;
 static struct proc_dir_entry *proc_folder;
