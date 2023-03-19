@@ -148,7 +148,7 @@ static ssize_t my_module_read(struct file *File, char __user* buffer, size_t cou
 void timer_callback(struct timer_list *data)
 {
 	char *position_ptr = strstr(procfs_buffer, "LED STATE: ");
-	pr_info("MY_MODULE: Timer %s()\n", __func__);
+	pr_info_once("MY_MODULE: Timer %s()\n", __func__);
 	if (blink)
 	{
 		if (gpio_get_value(GPIO_4))
@@ -175,6 +175,7 @@ void b_timer_callback(struct timer_list *data)
 		blink = !blink;
 	}
 	b_prev_state = b_curr_state;
+	pr_info_once("MY_MODULE: Timer %s()\n", __func__);
 	mod_timer(&b_timer, jiffies + msecs_to_jiffies(BUTTON_SCAN_PERIOD));
 }
 
